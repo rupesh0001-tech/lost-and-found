@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body class="bg-light">
+
+  <!-- Page Heading -->
+  <div class="text-center mt-5">
+    <h1 class="fw-bold">Login for <span class="text-primary">Lost & Found</span> Portal</h1>
+    <p class="text-muted">Login to your account to report, claim, and track lost or found items securely.</p>
+  </div>
+
+  <!-- Register Box -->
+  <div class="register-box bg-white">
+    <!-- Image Box -->
+    <div class="register-img-box">
+      <img src="https://wallpapers.com/images/hd/aesthetic-single-banana-ca70e4qdhc1z45gy.webp" alt="">
+    </div>
+
+    <!-- Input Box -->
+    <div class="register-input-box">
+      <div class="register-txt mb-3">
+        <h2>Welcome  <span class="text-primary" >Back !  </span></h2>
+      </div>
+
+      <form action="/login" method="POST" class="form w-100">
+        
+        <div class="form-group mb-3">
+          <label for="email" class="form-label">Email Address</label>
+          <input type="email" name="email" id="email" required class="form-control">
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" name="password" id="password" minlength="6" required class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 mt-3">Register</button>
+
+        <p class="mt-3 text-muted text-center">Already have an account? <a href="/login">Login here</a></p>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

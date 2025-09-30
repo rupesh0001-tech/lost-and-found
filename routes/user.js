@@ -32,6 +32,26 @@ router.post('/register', async (req, res) => {
 
 });
 
+router.get('/login', (req, res) => {
+    res.render('login')
+});
+
+router.post('/login', async (req, res) => {
+
+    // find user
+    let {email, password} = req.body;
+    let findUser = await User.findOne({email : email});
+     if (!findUser){
+        res.send('User not found');
+     }
+    let isAuth = bcrypt.compare(password, findUser.password);
+    if(isAuth){
+        res.send('logged in successful');
+    }
+    
+
+});
+
 
 
 module.exports = router
