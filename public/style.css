@@ -1,0 +1,46 @@
+.register-box {
+  margin: 3rem auto;
+  display: flex;
+  flex-direction: row;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  width: 60%;
+  max-width: 900px; /* smaller size */
+  background: #fff;
+  gap: 1rem;
+}
+
+/* Image box */
+.register-img-box {
+  flex: 1;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-img-box img {
+  width: 100%;
+  border-radius: 0.75rem;
+}
+
+/* Input box */
+.register-input-box {
+  flex: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .register-box {
+    flex-direction: column;
+    width: 90%;
+  }
+
+  .register-img-box {
+    display: none;
+  }
+}
