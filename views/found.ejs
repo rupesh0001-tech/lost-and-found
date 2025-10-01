@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LoFo - Lost & Found</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/found.css">
+</head>
+
+<body>
+
+  <header class="head">
+    <div class="logo">LoFo</div>
+    <nav>
+      <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/found">Found</a></li>
+        <li><a href="/lost">Lost</a></li>
+        <li><a href="/report">Check Reports</a></li>
+      </ul>
+    </nav>
+    <div class="auth-buttons">
+      <a href="/Login" class="login">Login</a>
+      <a href="/register" class="signup">Register</a>
+    </div>
+  </header>
+
+  <section class="form">
+    <div class="form-container">
+      <h2>Report a Found Item</h2>
+      <form action="/found" method="POST" >
+        <label for="title">Item Title</label>
+        <input type="text" id="title" name="title" placeholder="Enter item title" required>
+
+        <label for="description">Description</label>
+        <textarea id="description" name="describtion" placeholder="Enter item description" rows="4" required></textarea>
+
+        <label for="img">Image URL</label>
+        <input type="text" id="img" name="img" placeholder="Enter image URL">
+
+        <label for="location">Location</label>
+        <input type="text" id="location" name="location" placeholder="Where was the item found?" required>
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </section>
+
+
+
+
+</body>
+
+</html>

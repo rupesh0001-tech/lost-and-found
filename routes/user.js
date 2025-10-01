@@ -2,6 +2,7 @@ const express = require('express');
 const router = express();
 const bcrypt = require('bcrypt');
 const User =   require('../models/user');
+const { renderFile } = require('ejs');
 
 
 router.get('/register', (req, res) => {
@@ -29,6 +30,7 @@ router.post('/register', async (req, res) => {
     // save and redirect user
     await newUser.save()
     console.log('new user saved');
+    res.redirect('/home');
 
 });
 
@@ -44,9 +46,10 @@ router.post('/login', async (req, res) => {
      if (!findUser){
         res.send('User not found');
      }
+     // compare pass and give auth acess to site
     let isAuth = bcrypt.compare(password, findUser.password);
     if(isAuth){
-        res.send('logged in successful');
+        res.redirect('/home');
     }
     
 

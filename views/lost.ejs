@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LoFo - Lost & Found</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/found.css">
+</head>
+
+<body>
+
+  <header class="head">
+    <div class="logo">LoFo</div>
+    <nav>
+      <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/found">Found</a></li>
+        <li><a href="/lost">Lost</a></li>
+        <li><a href="/report">Check Reports</a></li>
+      </ul>
+    </nav>
+    <div class="auth-buttons">
+      <a href="/Login" class="login">Login</a>
+      <a href="/register" class="signup">Register</a>
+    </div>
+  </header>
+
+  <section class="form">
+    <div class="form-container">
+      <h2>Report a Lost item Item</h2>
+      <p>Just make sure to Describe it clearly Our AI will check In the database</p>
+      <form action="/lost" method="POST" >
+        <label for="description">Description</label>
+        <textarea id="description" name="describtion" placeholder="describe what you lost" rows="4" required></textarea>
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </section>
+
+
+
+
+</body>
+
+</html>
