@@ -13,9 +13,9 @@ const itemSchema = new mongoose.Schema({
         required: true,
         
     },
-    describtionArr: [{
+    describtionArr: {
         type : Array
-    }],
+    },
     img: {
         type: String,
     },

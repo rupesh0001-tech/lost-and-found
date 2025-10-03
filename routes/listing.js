@@ -2,14 +2,17 @@ const express = require('express');
 const router = express();
 const listing = require('../models/listing');
 const keyword_extractor = require("keyword-extractor");
+const auth = require('../middleware/auth')
 
-router.get('/lost', (req, res) => {
-    res.render('lost')
+router.get('/lost', auth,(req, res) => {
+    res.render('lost');
 })
 
-router.post('/lost', async (req, res) => {
+router.post('/lost',auth, async (req, res) => {
     //extracted the data 
-    let {describtion} = req.body;
+    let {describtion, location} = req.body;
+    
+
     //extract keywords
     const extraction_result = keyword_extractor.extract(describtion,{
 
@@ -19,12 +22,27 @@ router.post('/lost', async (req, res) => {
     remove_duplicates: false
 
     });
-
-    console.log(extraction_result);
-
     
+    let founds = [];
+    // logic to find items 
+    // find the items via location
+    let founditems =  await listing.find({location : location});
+    // check each item matchs with that location
+    for(let i = 0; i < founditems.length; i++){
+        let checkCount = 0;
+        for(let item of founditems[i].describtionArr){
+            if (extraction_result.includes(item)) {
+                checkCount++;
+            }
+        }
+        if(checkCount >= 3){
+            founds.push(founditems[i])
+        } 
+    }
 
-
+    if(founds){
+        res.render('match', {founds})
+    }
 
 })
 

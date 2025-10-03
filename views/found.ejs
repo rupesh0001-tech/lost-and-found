@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LoFo - Lost & Found</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/found.css">
 </head>
 
@@ -29,27 +29,66 @@
 
   <section class="form">
     <div class="form-container">
+      <div class="form-accent"></div>
       <h2>Report a Found Item</h2>
-      <form action="/found" method="POST" >
+      <p>Help reunite lost items with their owners by providing details below</p>
+      <form action="/found" method="POST">
         <label for="title">Item Title</label>
-        <input type="text" id="title" name="title" placeholder="Enter item title" required>
+        <input type="text" id="title" name="title" placeholder="e.g., Blue Water Bottle" required>
 
         <label for="description">Description</label>
-        <textarea id="description" name="describtion" placeholder="Enter item description" rows="4" required></textarea>
+        <textarea id="description" name="describtion" placeholder="Provide detailed information about the item (color, brand, distinctive features, etc.)" rows="4" required></textarea>
 
         <label for="img">Image URL</label>
-        <input type="text" id="img" name="img" placeholder="Enter image URL">
+        <input type="text" id="img" name="img" placeholder="https://example.com/image.jpg">
 
-        <label for="location">Location</label>
-        <input type="text" id="location" name="location" placeholder="Where was the item found?" required>
+        <div class="mb-3">
+          <label for="location">Location Found</label>
+          <select id="location" name="location" required>
+            <option value="">-- Select Location --</option>
+            <option value="canteen">Canteen</option>
+            <option value="classroom">Classroom</option>
+            <option value="campus">Campus</option>
+            <option value="washroom">Washroom</option>
+            <option value="library">Library</option>
+            <option value="parking">Parking</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
 
-        <button type="submit">Submit</button>
+        <div class="mb-3" id="classroomInput" style="display:none;">
+          <label for="classroomNo">Classroom Number</label>
+          <input type="text" id="classroomNo" name="classroomNo" placeholder="e.g., Room 301">
+        </div>
+
+        <div class="mb-3" id="otherInput" style="display:none;">
+          <label for="otherLocation">Please Specify</label>
+          <input type="text" id="otherLocation" name="otherLocation" placeholder="Enter the specific location">
+        </div>
+
+        <button type="submit">Submit Report</button>
       </form>
     </div>
   </section>
 
+  <script>
+    const locationSelect = document.getElementById('location');
+    const classroomInput = document.getElementById('classroomInput');
+    const otherInput = document.getElementById('otherInput');
 
-
+    locationSelect.addEventListener('change', function () {
+      if (this.value === 'classroom') {
+        classroomInput.style.display = 'block';
+        otherInput.style.display = 'none';
+      } else if (this.value === 'other') {
+        otherInput.style.display = 'block';
+        classroomInput.style.display = 'none';
+      } else {
+        classroomInput.style.display = 'none';
+        otherInput.style.display = 'none';
+      }
+    });
+  </script>
 
 </body>
 
