@@ -5,6 +5,19 @@ const User =   require('../models/user');
 const requireAuth = require('../middleware/auth');
 const jwt = require('jsonwebtoken');
 
+router.get('/', (req, res) => {
+    const token = req.cookies?.token;
+    if (token) {
+        try {
+            jwt.verify(token, 'SECRET_KEY');
+            return res.redirect('/home');
+        } catch (err) {
+            res.clearCookie('token');
+        }
+    }
+    res.redirect('/login');
+});
+
 router.get('/home', requireAuth, (req, res) => {
     let isAuth = false;
     const token = req.cookies?.token;
