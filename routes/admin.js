@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express();
-const Item = require('../models/listing')
+const Item = require('../models/listing');
+const requireAuth = require('../middleware/auth');
 
 
-router.get('/admin', async(req, res) => {
+router.get('/admin', requireAuth, async(req, res) => {
     try{
         let items = await Item.find({});
         console.log(items);
