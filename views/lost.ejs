@@ -135,6 +135,7 @@
         opacity: 0;
         transform: translateY(30px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -243,6 +244,7 @@
         opacity: 0;
         transform: translateY(-10px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -345,10 +347,20 @@
         <li><a href="/report">Check Reports</a></li>
       </ul>
     </nav>
-    <div class="auth-buttons">
-      <a href="/Login" class="login">Login</a>
-      <a href="/register" class="signup">Register</a>
-    </div>
+    <% if(!isAuth) {%>
+      <div class="auth-buttons">
+        <a href="/Login" class="login">Login</a>
+        <a href="/register" class="signup">Register</a>
+      </div>
+    <% } %>
+
+    <% if(isAuth) {%>
+        <div class="auth-buttons">
+          <a href="/Logout" class="logout">Logout</a>
+
+        </div>
+    <% } %>
+
   </header>
 
   <section class="form">
@@ -358,7 +370,9 @@
       <p>Describe what you lost clearly. Our AI will check the database for matches.</p>
       <form action="/lost" method="POST">
         <label for="description">Description</label>
-        <textarea id="description" name="describtion" placeholder="Describe your lost item in detail (color, brand, distinctive features, etc.)" rows="4" required></textarea>
+        <textarea id="description" name="describtion"
+          placeholder="Describe your lost item in detail (color, brand, distinctive features, etc.)" rows="4"
+          required></textarea>
 
         <div class="mb-3">
           <label for="location">Location Last Seen</label>

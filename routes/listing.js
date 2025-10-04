@@ -2,13 +2,14 @@ const express = require('express');
 const router = express();
 const listing = require('../models/listing');
 const keyword_extractor = require("keyword-extractor");
-const auth = require('../middleware/auth')
+const requireAuth = require('../middleware/auth');
+const jwt = require('jsonwebtoken');
 
-router.get('/lost', auth,(req, res) => {
+router.get('/lost', requireAuth,(req, res) => {
     res.render('lost');
 })
 
-router.post('/lost',auth, async (req, res) => {
+router.post('/lost', requireAuth, async (req, res) => {
     //extracted the data 
     let {describtion, location} = req.body;
     
@@ -46,13 +47,23 @@ router.post('/lost',auth, async (req, res) => {
 
 })
 
-router.get('/found', (req, res) => {
-    res.render('found');
+router.get('/found', requireAuth, (req, res) => {
+    let isAuth = false;
+    const token = req.cookies?.token;
+    if (token) {
+        try {
+            jwt.verify(token, 'SECRET_KEY');
+            isAuth = true;
+        } catch (err) {
+            res.clearCookie('token');
+        }
+    }
+    res.render('found', { isAuth });
 })
 
 
 
-router.post('/found', async (req, res) => {
+router.post('/found', requireAuth, async (req, res) => {
     //extract data
     let { title, describtion, img, location } = req.body;
 

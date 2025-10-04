@@ -21,10 +21,20 @@
         <li><a href="/report">Check Reports</a></li>
       </ul>
     </nav>
-    <div class="auth-buttons">
-      <a href="/Login" class="login">Login</a>
-      <a href="/register" class="signup">Register</a>
-    </div>
+    <% if(!isAuth) {%>
+      <div class="auth-buttons">
+        <a href="/Login" class="login">Login</a>
+        <a href="/register" class="signup">Register</a>
+      </div>
+    <% } %>
+
+    <% if(isAuth) {%>
+      <div class="auth-buttons">
+        <a href="/Logout" class="logout">Logout</a>
+        
+      </div>
+    <% } %>
+
   </header>
 
   

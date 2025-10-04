@@ -10,6 +10,7 @@ router.get('/register', (req, res) => {
 });
 
 router.post('/register', async (req, res) => {
+    
 
     //extract and bycrpt password 
     let {name, age, email, phone, password} = req.body;
@@ -31,8 +32,10 @@ router.post('/register', async (req, res) => {
     await newUser.save()
     console.log('new user saved');
     let token = jwt.sign({ email }, 'SECRET_KEY', { expiresIn: "1h" });
+    isAuth = true;
     res.cookie('token', token);
-    res.redirect('/home');
+    res.locals.isAuth = true;
+    res.redirect('/home', );
 
 });
 
@@ -41,6 +44,7 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
+    
     try {
         let { email, password } = req.body;
         let findUser = await User.findOne({ email: email });
@@ -49,19 +53,30 @@ router.post('/login', async (req, res) => {
             return res.status(404).send('User not found');
         }
 
-        let isAuth = await bcrypt.compare(password, findUser.password);
+        let Auth = await bcrypt.compare(password, findUser.password);
 
-        if (!isAuth) {
+        if (!Auth) {
             return res.status(401).send('Invalid password');
         }
 
         let token = jwt.sign({ email }, 'SECRET_KEY', { expiresIn: '1h' });
         res.cookie('token', token);
+        res.locals.isAuth = true;
         res.redirect('/home');
     } catch (err) {
         console.error(err);
         res.status(500).send('Server error');
     }
+});
+
+//logic for logout 
+router.get("/logout", (req, res) => {
+  // clear the JWT cookie
+  res.clearCookie("token", {
+  });
+
+  // redirect user back to login page (or home page)
+  res.redirect("/home");
 });
 
 

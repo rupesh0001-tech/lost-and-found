@@ -1,28 +1,24 @@
-const express = require('express');
-const app = express();
+// middleware/requireAuth.js
 const jwt = require('jsonwebtoken');
 
-function authMiddleware(req, res, next) {
-    const token = req.cookies?.token;  
-  // Usually: "Authorization: Bearer <token>"
+function requireAuth(req, res, next) {
+  const token = req.cookies?.token;
 
   if (!token) {
-    return res.status(401).json({ message: "Access denied. No token provided." });
+    // No token, user not logged in
+    return res.redirect('/login');
   }
 
   try {
-    // Verify token
+    // Verify token validity
     const decoded = jwt.verify(token, 'SECRET_KEY');
-
-    // Attach user info to request
-    req.user = decoded;
-    next(); // go to next middleware/route
+    req.user = decoded; // Optional: attach user data
+    next(); // proceed to protected route
   } catch (err) {
-    res.status(400).json({ message: "Somthing went wrong" });
+    // Invalid or expired token
+    res.clearCookie('token');
+    return res.redirect('/login');
   }
 }
 
-module.exports = authMiddleware;
-
-
-
+module.exports = requireAuth;
