@@ -3,12 +3,17 @@
 This is a Lost and Found web application built for a college environment. The system allows users to report lost items and search for found items by matching keywords and locations. The application uses a matching algorithm to suggest potential matches between lost item descriptions and found items in the database.
 
 **Recent Changes (October 4, 2025)**:
-- Configured for Replit environment with port 5000 and 0.0.0.0 binding
-- Protected admin route with authentication middleware
-- Enhanced UI/UX with modern CSS styling (gradient buttons, smooth animations, improved forms)
-- Added root route ("/") that redirects to login or home based on auth status
-- Configured MongoDB to run locally with startup script
-- Set up deployment configuration for VM deployment
+- **Admin Authentication System**: Created separate admin model with dedicated login portal (/admin/login) requiring special credentials (default: admin/admin123 - change after first login)
+- **User Reports Feature**: Added /report route showing each user's own lost and found items with statistics and tabbed interface
+- **Item Status Tracking**: Updated Item model to include 'status' field (lost/found) for better organization
+- **Enhanced Forms**: Added title and image fields to lost item reports; all items now linked to user accounts
+- **Modern UI Enhancements**: 
+  - New stock images for login and register pages
+  - Footer component added to all pages with quick links and contact info
+  - Gradient buttons with hover animations throughout
+  - Improved card designs with shadow effects
+  - Responsive layouts for mobile devices
+- **Configured for Replit**: Port 5000 with 0.0.0.0 binding, MongoDB startup script, VM deployment ready
 
 # User Preferences
 
@@ -33,7 +38,8 @@ Preferred communication style: Simple, everyday language.
 
 **Schema Design**:
 - **User Model**: Stores user credentials (name, age, email, phone, hashed password)
-- **Item Model**: Stores lost/found item information (title, description, location, image URL, author reference)
+- **Admin Model**: Stores admin credentials (username, password, role) with separate authentication flow
+- **Item Model**: Stores lost/found item information (title, description, location, image URL, status, author reference, keywords array)
 - Relationship: Items reference Users through the `Author` field using MongoDB ObjectId references
 
 **Rationale**: MongoDB provides flexible document storage suitable for varying item descriptions. Mongoose adds schema validation and simplified query operations.
@@ -48,9 +54,12 @@ Preferred communication style: Simple, everyday language.
 4. Invalid/expired tokens trigger redirect to login page
 
 **Security Considerations**:
-- Passwords hashed using bcrypt (10 salt rounds)
-- Token secret currently hardcoded as 'SECRET_KEY' (should be environment variable)
-- Cookie-based storage prevents XSS attacks on token
+- All passwords hashed using bcrypt (10 salt rounds)
+- Separate JWT tokens for users and admins with different secret keys
+- User token: 'SECRET_KEY', Admin token: 'ADMIN_SECRET_KEY'
+- Cookie-based storage prevents XSS attacks on tokens
+- Admin authentication uses separate middleware (`requireAdminAuth`)
+- **Important**: Default admin credentials (admin/admin123) should be changed after first login
 
 ## Item Matching Algorithm
 **Technology**: keyword-extractor npm package
@@ -76,9 +85,15 @@ Preferred communication style: Simple, everyday language.
 
 ## Route Organization
 - **Home Routes** (`/`, `/home`): Landing pages with auth redirects
-- **User Routes** (`/register`, `/login`): Authentication endpoints
-- **Listing Routes** (`/lost`): Lost item reporting and matching
-- **Admin Routes** (`/admin`): Administrative item viewing (protected)
+- **User Routes** (`/register`, `/login`, `/logout`): User authentication endpoints
+- **Listing Routes** (`/lost`, `/found`, `/report`): 
+  - `/lost`: Report lost items and search for matches
+  - `/found`: Report found items
+  - `/report`: View user's own lost and found item reports
+- **Admin Routes** (`/admin/login`, `/admin/dashboard`, `/admin/logout`): 
+  - Separate admin authentication system
+  - Dashboard shows all items from all users
+  - Protected by `requireAdminAuth` middleware
 
 # External Dependencies
 

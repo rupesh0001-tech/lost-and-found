@@ -369,10 +369,16 @@
       <h2>Report a Lost Item</h2>
       <p>Describe what you lost clearly. Our AI will check the database for matches.</p>
       <form action="/lost" method="POST">
+        <label for="title">Item Name</label>
+        <input type="text" id="title" name="title" placeholder="e.g., Black Wallet, iPhone 12, Red Backpack" required>
+
         <label for="description">Description</label>
         <textarea id="description" name="describtion"
           placeholder="Describe your lost item in detail (color, brand, distinctive features, etc.)" rows="4"
           required></textarea>
+
+        <label for="img">Image URL (optional)</label>
+        <input type="text" id="img" name="img" placeholder="https://example.com/image.jpg">
 
         <div class="mb-3">
           <label for="location">Location Last Seen</label>
@@ -421,6 +427,8 @@
       }
     });
   </script>
+
+  <%- include('partials/footer') %>
 
 </body>
 

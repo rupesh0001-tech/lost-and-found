@@ -24,6 +24,11 @@ const itemSchema = new mongoose.Schema({
         required: true, // mandatory
         trim: true
     },
+    status: {
+        type: String,
+        enum: ['lost', 'found'],
+        required: true
+    },
     createdAt: {
         type: Date,
         default: Date.now
