@@ -13,6 +13,7 @@ connectDB();
 const userRoutes = require('./routes/user');
 const homeRoutes = require('./routes/home');
 const itemRoutes = require('./routes/listing');
+const adminRoutes = require('./routes/admin')
 const authMiddleware = require("./middleware/auth");
 
 // inbuilt middlewares
@@ -32,6 +33,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use('/', homeRoutes);
 app.use('/', userRoutes);
 app.use('/', itemRoutes);
+app.use('/', adminRoutes);
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

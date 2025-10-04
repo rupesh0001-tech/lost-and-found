@@ -6,7 +6,17 @@ const requireAuth = require('../middleware/auth');
 const jwt = require('jsonwebtoken');
 
 router.get('/lost', requireAuth,(req, res) => {
-    res.render('lost');
+    let isAuth = false;
+    const token = req.cookies?.token;
+    if (token) {
+        try {
+            jwt.verify(token, 'SECRET_KEY');
+            isAuth = true;
+        } catch (err) {
+            res.clearCookie('token');
+        }
+    }
+    res.render('lost', { isAuth });
 })
 
 router.post('/lost', requireAuth, async (req, res) => {
