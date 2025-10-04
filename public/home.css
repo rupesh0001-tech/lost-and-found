@@ -70,8 +70,19 @@ nav ul li a:hover {
 }
 
 .auth-buttons .signup {
-    background: #f39c12;
+    background: linear-gradient(135deg, #f39c12 0%, #e08e0b 100%);
     color: #fff;
+    box-shadow: 0 2px 8px rgba(243, 156, 18, 0.3);
+}
+
+.auth-buttons .signup:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(243, 156, 18, 0.4);
+}
+
+.auth-buttons .login:hover {
+    border-color: #f39c12;
+    color: #f39c12;
 }
 
 .hero {
@@ -121,13 +132,25 @@ nav ul li a:hover {
 }
 
 .hero-buttons .lost {
-    background: #f39c12;
+    background: linear-gradient(135deg, #f39c12 0%, #e08e0b 100%);
     color: #fff;
+    box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
+}
+
+.hero-buttons .lost:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(243, 156, 18, 0.4);
 }
 
 .hero-buttons .found {
-    background: #0c2e8a;
+    background: linear-gradient(135deg, #0c2e8a 0%, #1445b1 100%);
     color: #fff;
+    box-shadow: 0 4px 15px rgba(12, 46, 138, 0.3);
+}
+
+.hero-buttons .found:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(12, 46, 138, 0.4);
 }
 
 .hero-image {

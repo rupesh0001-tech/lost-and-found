@@ -2,13 +2,26 @@
   margin: 3rem auto;
   display: flex;
   flex-direction: row;
-  padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+  border-radius: 1.5rem;
   width: 60%;
-  max-width: 900px; /* smaller size */
-  background: #fff;
-  gap: 1rem;
+  max-width: 900px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  gap: 2rem;
+  animation: fadeIn 0.6s ease;
+  border: 1px solid rgba(243, 156, 18, 0.1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Image box */
@@ -18,11 +31,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background: linear-gradient(135deg, rgba(243, 156, 18, 0.05) 0%, rgba(12, 46, 138, 0.05) 100%);
+  border-radius: 1rem;
 }
 
 .register-img-box img {
   width: 100%;
-  border-radius: 0.75rem;
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.register-img-box img:hover {
+  transform: scale(1.02);
 }
 
 /* Input box */
@@ -31,6 +52,80 @@
   padding: 1rem;
   display: flex;
   flex-direction: column;
+}
+
+.register-input-box h2 {
+  color: #0c2e8a;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.register-input-box p {
+  color: #666;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.register-input-box input,
+.register-input-box select {
+  width: 100%;
+  padding: 0.85rem 1.2rem;
+  margin-bottom: 1.2rem;
+  border: 2px solid #e8e8e8;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
+  background: #fafafa;
+}
+
+.register-input-box input:focus,
+.register-input-box select:focus {
+  border-color: #f39c12;
+  box-shadow: 0 0 0 4px rgba(243, 156, 18, 0.1);
+  outline: none;
+  background: #fff;
+}
+
+.register-input-box button {
+  width: 100%;
+  padding: 0.9rem;
+  background: linear-gradient(135deg, #f39c12 0%, #e08e0b 100%);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+  box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
+}
+
+.register-input-box button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(243, 156, 18, 0.4);
+}
+
+.register-input-box button:active {
+  transform: translateY(0);
+}
+
+.register-input-box label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.form-divider {
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #f39c12 0%, #0c2e8a 100%);
+  margin: 0 auto 1.5rem;
+  border-radius: 2px;
 }
 
 /* Responsive */
