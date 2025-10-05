@@ -26,14 +26,14 @@
         <a href="/Login" class="login">Login</a>
         <a href="/register" class="signup">Register</a>
       </div>
-    <% } %>
+      <% } %>
 
-    <% if(isAuth) {%>
-      <div class="auth-buttons">
-        <a href="/Logout" class="logout">Logout</a>
-        
-      </div>
-    <% } %>
+        <% if(isAuth) {%>
+          <div class="auth-buttons">
+            <a href="/Logout" class="logout">Logout</a>
+
+          </div>
+          <% } %>
 
   </header>
 
@@ -42,15 +42,18 @@
       <div class="form-accent"></div>
       <h2>Report a Found Item</h2>
       <p>Help reunite lost items with their owners by providing details below</p>
-      <form action="/found" method="POST">
+      <form action="/found" method="POST" enctype="multipart/form-data">
         <label for="title">Item Title</label>
         <input type="text" id="title" name="title" placeholder="e.g., Blue Water Bottle" required>
 
         <label for="description">Description</label>
-        <textarea id="description" name="describtion" placeholder="Provide detailed information about the item (color, brand, distinctive features, etc.)" rows="4" required></textarea>
+        <textarea id="description" name="describtion"
+          placeholder="Provide detailed information about the item (color, brand, distinctive features, etc.)" rows="4"
+          required></textarea>
 
-        <label for="img">Image URL</label>
-        <input type="text" id="img" name="img" placeholder="https://example.com/image.jpg">
+        <label for="img" class="file-label">Upload Image</label>
+        <input type="file" id="img" name="img" class="file-input" placeholder="https://example.com/image.jpg">
+
 
         <div class="mb-3">
           <label for="location">Location Found</label>

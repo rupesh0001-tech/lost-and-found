@@ -1,0 +1,25 @@
+<header class="head">
+    <div class="logo">LoFo</div>
+    <nav>
+      <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/found">Found</a></li>
+        <li><a href="/lost">Lost</a></li>
+        <li><a href="/report">Check Reports</a></li>
+      </ul>
+    </nav>
+    <% if(!isAuth) {%>
+      <div class="auth-buttons">
+        <a href="/login" class="login">Login</a>
+        <a href="/register" class="signup">Register</a>
+      </div>
+    <% } %>
+
+    <% if(isAuth) {%>
+      <div class="auth-buttons">
+        <a href="/logout" class="logout">Logout</a>
+        
+      </div>
+    <% } %>
+
+  </header>

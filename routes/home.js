@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
     const token = req.cookies?.token;
     if (token) {
         try {
-            jwt.verify(token, 'SECRET_KEY');
+            jwt.verify(token, process.env.JWT_SECRET_KEY);
             return res.redirect('/home');
         } catch (err) {
             res.clearCookie('token');
@@ -23,7 +23,7 @@ router.get('/home', requireAuth, (req, res) => {
     const token = req.cookies?.token;
     if (token) {
         try {
-            jwt.verify(token, 'SECRET_KEY');
+            jwt.verify(token, process.env.JWT_SECRET_KEY);
             isAuth = true;
         } catch (err) {
             // Token is invalid or expired, treat as not authenticated

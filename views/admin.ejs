@@ -41,6 +41,9 @@
               <h5 class="card-title fw-semibold mb-2">
                 <%= item.title %>
               </h5>
+              <h5 class="card-title fw-semibold mb-2">
+                @<%= item.Author[0].name %>
+              </h5>
               <p class="card-text text-muted mb-2">
                 <%= item.describtion %>
               </p>
@@ -62,8 +65,13 @@
                 </div>
                 <% } %>
 
-                  <div class="mt-auto">
-                    <a href="#" class="btn btn-primary w-100">View Details</a>
+                  <div class="mt-auto d-flex gap-2">
+                    <a href="#" class="btn btn-primary flex-grow-1">View Details</a>
+                    <form action="/admin/delete/<%= item._id %>" method="POST" class="d-inline">
+                      <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this listing?')">
+                        <i class="bi bi-trash"></i>
+                      </button>
+                    </form>
                   </div>
             </div>
           </div>

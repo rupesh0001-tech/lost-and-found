@@ -11,7 +11,7 @@ function requireAuth(req, res, next) {
 
   try {
     // Verify token validity
-    const decoded = jwt.verify(token, 'SECRET_KEY');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
     req.user = decoded; // Optional: attach user data
     next(); // proceed to protected route
   } catch (err) {

@@ -31,7 +31,7 @@ router.post('/register', async (req, res) => {
     // save and redirect user
     await newUser.save()
     console.log('new user saved');
-    let token = jwt.sign({ email }, 'SECRET_KEY', { expiresIn: "1h" });
+    let token = jwt.sign({ email }, process.env.JWT_SECRET_KEY, { expiresIn: "1h" });
     isAuth = true;
     res.cookie('token', token);
     res.locals.isAuth = true;
@@ -59,7 +59,7 @@ router.post('/login', async (req, res) => {
             return res.status(401).send('Invalid password');
         }
 
-        let token = jwt.sign({ email }, 'SECRET_KEY', { expiresIn: '1h' });
+        let token = jwt.sign({ email }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
         res.cookie('token', token);
         res.locals.isAuth = true;
         res.redirect('/home');

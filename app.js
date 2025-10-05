@@ -4,9 +4,11 @@ const app = express();
 const mongoose = require('mongoose');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+require('dotenv').config();
+
 
 // require vars and folders
-const port = 5000;
+const port = process.env.port || 5000;
 const connectDB = require('./init/init');
 connectDB();
 
@@ -35,6 +37,6 @@ app.use('/', userRoutes);
 app.use('/', itemRoutes);
 app.use('/', adminRoutes);
 
-app.listen(port, '0.0.0.0', () => {
-  console.log(`Server running at http://0.0.0.0:${port}`);
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
 });

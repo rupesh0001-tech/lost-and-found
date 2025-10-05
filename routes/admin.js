@@ -50,7 +50,17 @@ router.get('/admin/dashboard', requireAdminAuth, async (req, res) => {
         res.render('admin', { items });
     } catch (error) {
         console.log('Something went wrong while accessing the admin dashboard');
-        res.send('Error loading dashboard');
+    }
+});
+
+router.post('/admin/delete/:id', requireAdminAuth, async (req, res) => {
+    try {
+        const listingId = req.params.id;
+        await Item.findByIdAndDelete(listingId);
+        res.redirect('/admin/dashboard');
+    } catch (error) {
+        console.log('Error deleting listing:', error);
+        res.status(500).send('Error deleting listing');
     }
 });
 

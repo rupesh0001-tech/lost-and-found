@@ -121,6 +121,39 @@ nav ul li a:hover::after {
     animation: slideUp 0.5s ease;
 }
 
+
+/* Container style for label */
+.file-label {
+    display: inline-block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+    padding: 8px 16px;
+    background-color: white;
+    color: black;
+    border-radius: 6px;
+    border: 1px solid black;
+    transition: background-color 0.3s;
+    
+}
+
+.file-label:hover {
+    background-color: white;
+}
+
+/* Hide default file input */
+.file-input {
+    margin-bottom: 1rem;
+    display: none; /* hides the default ugly input */
+}
+
+/* Optional: show selected file name */
+.file-input::file-selector-button {
+    display: none; /* hide built-in button in modern browsers */
+}
+
+
 @keyframes slideUp {
     from {
         opacity: 0;
