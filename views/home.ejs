@@ -324,40 +324,35 @@
       }
     }
 
-    @media (max-width: 768px) {
+   @media (max-width: 768px) {
       header {
         padding: 16px 20px;
-        flex-wrap: wrap;
       }
 
       nav ul {
-        gap: 20px;
+        display: none;
       }
 
-      .hero h1 {
-        font-size: 48px;
+
+    }
+
+    @media (max-width: 480px) {
+      .auth-buttons {
+        gap: 8px;
       }
 
-      .hero p {
-        font-size: 18px;
+      .auth-buttons a {
+        padding: 8px 16px;
+        font-size: 13px;
       }
 
-      .hero-buttons {
-        flex-direction: column;
-        width: 100%;
-        max-width: 300px;
-        margin: 0 auto;
-      }
-
-      .hero-buttons a {
-        width: 100%;
-      }
+      
     }
   </style>
 </head>
 <body>
 
-  <header>
+<header>
     <div class="logo">LoFo</div>
     <nav>
       <ul>
@@ -367,7 +362,6 @@
         <li><a href="/report">Check Reports</a></li>
       </ul>
     </nav>
-
     <% if(!isAuth) {%>
       <div class="auth-buttons">
         <a href="/Login" class="login">Sign in</a>
@@ -410,10 +404,10 @@
 
     <div class="hero-content">
       <h1>
-        <span class="gradient-text">Think, Report, and Find</span>
-        <span class="light-text">all in one place</span>
+        <span class="gradient-text">Lost, Report, and Find</span>
+        <span class="light-text">AI finds it for you</span>
       </h1>
-      <p>Efficiently manage lost and found items and help reconnect people with their belongings.</p>
+      <p>Join LoFo to report lost items, post found ones, and let AI help you reconnect with what matters.</p>
       <div class="hero-buttons">
         <a href="/lost" class="btn-lost">Lost Somthing ?</a>
         <a href="/found" class="btn-found"> Found Somthing ?</a>
