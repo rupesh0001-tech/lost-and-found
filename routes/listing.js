@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const cloudinary = require('../config/cloudinary'); // ✅ ensure this exports cloudinary.v2
 const { upload } = require('../multer'); // your multer setup
 const User = require('../models/user');
+const user = require('../models/user');
 
 // GET Lost Page
 router.get('/lost', requireAuth, (req, res) => {
@@ -162,5 +163,12 @@ router.get('/report', requireAuth, async (req, res) => {
         res.redirect('/login');
     }
 });
+
+router.post('/found/:id', async(req, res) => {
+    let {id} = req.params;
+    let newUser = await user.findById({_id :id});
+    res.render('contact', {newUser})
+    
+})
 
 module.exports = router;

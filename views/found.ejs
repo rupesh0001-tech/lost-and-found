@@ -4,14 +4,464 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LoFo - Lost & Found</title>
+  <title>Report Found Item - LoFo</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/found.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: #f5f5f7;
+      position: relative;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* Decorative background pattern */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(147, 197, 253, 0.04) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Diagonal grid pattern */
+    body::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      background-image: 
+        repeating-linear-gradient(45deg, transparent, transparent 50px, rgba(0,0,0,0.01) 50px, rgba(0,0,0,0.01) 51px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      position: relative;
+      z-index: 100;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 24px;
+      color: #000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: #3b82f6;
+      border-radius: 50%;
+    }
+
+    .logo::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: #60a5fa;
+      border-radius: 50%;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 40px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #000;
+      font-weight: 500;
+      font-size: 15px;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #3b82f6;
+    }
+
+    .auth-buttons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .auth-buttons a {
+      padding: 10px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+
+    .login {
+      color: #000;
+      background: transparent;
+    }
+
+    .login:hover {
+      color: #3b82f6;
+    }
+
+    .signup, .logout {
+      background: #3b82f6;
+      color: #fff;
+    }
+
+    .signup:hover, .logout:hover {
+      background: #2563eb;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
+
+    .form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 3rem 5%;
+      min-height: calc(100vh - 80px);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Decorative floating cards */
+    .floating-card {
+      position: absolute;
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      animation: float 6s ease-in-out infinite;
+      z-index: 1;
+      border: 1px solid #e5e7eb;
+    }
+
+    .card-left-1 {
+      top: 15%;
+      left: 8%;
+      width: 200px;
+      animation-delay: 0s;
+    }
+
+    .card-left-2 {
+      bottom: 25%;
+      left: 10%;
+      width: 180px;
+      animation-delay: 3s;
+    }
+
+    .card-right-1 {
+      top: 20%;
+      right: 8%;
+      width: 190px;
+      animation-delay: 1.5s;
+    }
+
+    .card-right-2 {
+      bottom: 30%;
+      right: 10%;
+      width: 170px;
+      animation-delay: 4.5s;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-20px) rotate(2deg);
+      }
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #000;
+      margin-bottom: 6px;
+    }
+
+    .card-subtitle {
+      font-size: 12px;
+      color: #6b7280;
+      line-height: 1.4;
+    }
+
+    .form-container {
+      background: #ffffff;
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      width: 100%;
+      max-width: 600px;
+      animation: slideUp 0.5s ease;
+      position: relative;
+      z-index: 2;
+      border: 1px solid #e5e7eb;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 0.5rem;
+      color: #000;
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .form-container > p {
+      text-align: center;
+      color: #6b7280;
+      margin-bottom: 2.5rem;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .form-container label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #000;
+      font-size: 14px;
+    }
+
+    .form-container label::after {
+      content: " *";
+      color: #ef4444;
+    }
+
+    .form-container textarea,
+    .form-container select,
+    .form-container input[type="text"] {
+      width: 100%;
+      padding: 12px 16px;
+      margin-bottom: 1.5rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.3s ease;
+      background: #fff;
+      color: #000;
+    }
+
+    .form-container textarea:focus,
+    .form-container select:focus,
+    .form-container input[type="text"]:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      outline: none;
+    }
+
+    .form-container textarea::placeholder,
+    .form-container input[type="text"]::placeholder {
+      color: #9ca3af;
+    }
+
+    .form-container textarea {
+      resize: vertical;
+      min-height: 140px;
+      line-height: 1.6;
+    }
+
+    .form-container select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%233b82f6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 20px;
+      padding-right: 2.5rem;
+    }
+
+    /* File input styling */
+    .file-input {
+      width: 100%;
+      padding: 12px 16px;
+      margin-bottom: 1.5rem;
+      border: 2px dashed #e5e7eb;
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.3s ease;
+      background: #fafafa;
+      cursor: pointer;
+    }
+
+    .file-input:hover {
+      border-color: #3b82f6;
+      background: #f0f9ff;
+    }
+
+    .file-input:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      outline: none;
+      background: #fff;
+    }
+
+    .file-input::file-selector-button {
+      padding: 8px 16px;
+      background: #3b82f6;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 14px;
+      margin-right: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .file-input::file-selector-button:hover {
+      background: #2563eb;
+    }
+
+    .mb-3 {
+      margin-bottom: 1.5rem;
+    }
+
+    #classroomInput,
+    #otherInput {
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    #classroomInput input,
+    #otherInput input {
+      margin-bottom: 0;
+    }
+
+    .form-container button[type="submit"] {
+      width: 100%;
+      padding: 14px;
+      background: #3b82f6;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.25);
+    }
+
+    .form-container button[type="submit"]:hover {
+      background: #2563eb;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.35);
+    }
+
+    .form-container button[type="submit"]:active {
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1200px) {
+      .floating-card {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 16px 20px;
+      }
+
+      nav ul {
+        display: none;
+      }
+
+      .form {
+        padding: 2rem 1rem;
+      }
+
+      .form-container {
+        padding: 2rem 1.5rem;
+      }
+
+      .form-container h2 {
+        font-size: 24px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .auth-buttons {
+        gap: 8px;
+      }
+
+      .auth-buttons a {
+        padding: 8px 16px;
+        font-size: 13px;
+      }
+
+      .form-container {
+        padding: 1.5rem 1.2rem;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-  <header class="head">
+  <header>
     <div class="logo">LoFo</div>
     <nav>
       <ul>
@@ -23,23 +473,45 @@
     </nav>
     <% if(!isAuth) {%>
       <div class="auth-buttons">
-        <a href="/Login" class="login">Login</a>
-        <a href="/register" class="signup">Register</a>
+        <a href="/Login" class="login">Sign in</a>
+        <a href="/register" class="signup">Get demo</a>
       </div>
-      <% } %>
+    <% } %>
 
-        <% if(isAuth) {%>
-          <div class="auth-buttons">
-            <a href="/Logout" class="logout">Logout</a>
-
-          </div>
-          <% } %>
-
+    <% if(isAuth) {%>
+      <div class="auth-buttons">
+        <a href="/Logout" class="logout">Logout</a>
+      </div>
+    <% } %>
   </header>
 
   <section class="form">
+    <!-- Decorative floating cards around the form -->
+    <div class="floating-card card-left-1">
+      <div class="card-icon">📸</div>
+      <div class="card-title">Photo Upload</div>
+      <div class="card-subtitle">Add images to help identify items faster</div>
+    </div>
+
+    <div class="floating-card card-left-2">
+      <div class="card-icon">🤝</div>
+      <div class="card-title">Help Others</div>
+      <div class="card-subtitle">Reunite people with their belongings</div>
+    </div>
+
+    <div class="floating-card card-right-1">
+      <div class="card-icon">✅</div>
+      <div class="card-title">Verified Reports</div>
+      <div class="card-subtitle">Secure and trusted platform</div>
+    </div>
+
+    <div class="floating-card card-right-2">
+      <div class="card-icon">⚡</div>
+      <div class="card-title">Quick Process</div>
+      <div class="card-subtitle">Report found items in seconds</div>
+    </div>
+
     <div class="form-container">
-      <div class="form-accent"></div>
       <h2>Report a Found Item</h2>
       <p>Help reunite lost items with their owners by providing details below</p>
       <form action="/found" method="POST" enctype="multipart/form-data">
@@ -52,8 +524,7 @@
           required></textarea>
 
         <label for="img" class="file-label">Upload Image</label>
-        <input type="file" id="img" name="img" class="file-input" placeholder="https://example.com/image.jpg">
-
+        <input type="file" id="img" name="img" class="file-input" accept="image/*">
 
         <div class="mb-3">
           <label for="location">Location Found</label>

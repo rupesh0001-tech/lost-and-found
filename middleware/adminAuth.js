@@ -8,7 +8,7 @@ function requireAdminAuth(req, res, next) {
   }
 
   try {
-    const decoded = jwt.verify(token, 'ADMIN_SECRET_KEY');
+    const decoded = jwt.verify(token, process.env.ADMIN_SECRET_KEY);
     if (decoded.role !== 'admin') {
       return res.redirect('/admin/login');
     }
