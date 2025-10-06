@@ -11,7 +11,9 @@ require('dotenv').config();
 const port = process.env.port || 5000;
 const connectDB = require('./init/init');
 connectDB();
+const rateLimit = require('./middleware/ratelimit');
 
+//require Routes
 const userRoutes = require('./routes/user');
 const homeRoutes = require('./routes/home');
 const itemRoutes = require('./routes/listing');
@@ -20,6 +22,7 @@ const authMiddleware = require("./middleware/auth");
 
 
 // inbuilt middlewares
+app.use(rateLimit);
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -29,8 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// auth middleware (must come AFTER cookieParser)
-// app.use(authMiddleware); // Moved to specific routes
+
 
 // routes
 app.use('/', homeRoutes);
