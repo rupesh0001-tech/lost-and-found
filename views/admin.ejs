@@ -11,10 +11,143 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <link rel="stylesheet" href="/found.css">
 </head>
+ <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: #f5f5f7;
+      position: relative;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* Decorative background pattern */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(147, 197, 253, 0.04) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Diagonal grid pattern */
+    body::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      background-image: 
+        repeating-linear-gradient(45deg, transparent, transparent 50px, rgba(0,0,0,0.01) 50px, rgba(0,0,0,0.01) 51px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      position: relative;
+      z-index: 100;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 24px;
+      color: #000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: #3b82f6;
+      border-radius: 50%;
+    }
+
+    .logo::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: #60a5fa;
+      border-radius: 50%;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 40px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #000;
+      font-weight: 500;
+      font-size: 15px;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #3b82f6;
+    }
+
+    .auth-buttons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .auth-buttons a {
+      padding: 10px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+
+    .login {
+      color: #000;
+      background: transparent;
+    }
+
+    .login:hover {
+      color: #3b82f6;
+    }
+
+    .signup, .logout {
+      background: #3b82f6;
+      color: #fff;
+    }
+
+    .signup:hover, .logout:hover {
+      background: #2563eb;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
+</style>
 
 <body>
 
-  <header class="head">
+ <header>
     <div class="logo">LoFo</div>
     <nav>
       <ul>
@@ -24,9 +157,13 @@
         <li><a href="/report">Check Reports</a></li>
       </ul>
     </nav>
-    <div class="auth-buttons">
-      <a href="/Logout" class="logout">Logout</a>
-    </div>
+    
+
+    
+      <div class="auth-buttons">
+        <a href="/Logout" class="logout">Logout</a>
+      </div>
+    
   </header>
 
   <main class="container my-5">

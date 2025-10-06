@@ -18,6 +18,7 @@ const itemRoutes = require('./routes/listing');
 const adminRoutes = require('./routes/admin')
 const authMiddleware = require("./middleware/auth");
 
+
 // inbuilt middlewares
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
@@ -36,6 +37,13 @@ app.use('/', homeRoutes);
 app.use('/', userRoutes);
 app.use('/', itemRoutes);
 app.use('/', adminRoutes);
+
+//error handling middleware 
+app.use((req, res, next) => {
+    console.log(`404 Error - Page not found: ${req.originalUrl}`);
+    res.status(404).render('404', { url: req.originalUrl });
+});
+
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
