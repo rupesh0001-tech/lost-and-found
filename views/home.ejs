@@ -344,6 +344,8 @@
       .floating-card {
         display: none;
       }
+
+      
     }
 
    @media (max-width: 768px) {
@@ -355,6 +357,11 @@
         display: none;
       }
 
+      h1{
+        font-size: 1rem;
+        color: #f5f5f7;
+      }
+
 
     }
 
@@ -363,12 +370,46 @@
         gap: 8px;
       }
 
+      
+
       .auth-buttons a {
         padding: 8px 16px;
         font-size: 13px;
       }
 
       
+    }
+
+@media (max-width: 768px) {
+
+   p{
+      font-size: 1rem !important;
+      font-weight: 100;
+      color: ;
+    }
+
+    .gradient-text{
+      font-size: 3rem;
+    }
+
+    .light-text{
+      font-size: 2rem;
+    }
+
+    .hero-buttons{
+      display: flex;
+      flex-direction: column;
+
+    }
+
+    .btn{
+      height: 4rem !important;
+      width: 14rem;
+    }
+
+
+
+    
     }
   </style>
 </head>
@@ -429,11 +470,11 @@
         <span class="gradient-text">Lost, Report, and Find</span>
         <span class="light-text">AI finds it for you</span>
       </h1>
-      <p>Join LoFo to report lost items, post found ones, and let AI help you reconnect with what matters.</p>
+      <p class="para" >Join LoFo to report lost items, post found one, and let AI help you reconnect with what matters.</p>
       <div class="hero-buttons">
-        <a href="/lost" class="btn-lost">Lost Somthing ?</a>
-        <a href="/found" class="btn-found"> Found Somthing ?</a>
-        <a href="/how-it-work" class="btn-how"> how it works?</a>
+        <a href="/lost" class="btn btn-lost">Lost Somthing ?</a>
+        <a href="/found" class="btn btn-found"> Found Somthing ?</a>
+        <a href="/how-it-work" class=" btn btn-how"> how it works?</a>
       </div>
     </div>
   </section>
