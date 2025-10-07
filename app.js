@@ -11,7 +11,7 @@ require('dotenv').config();
 const port = process.env.port || 5000;
 const connectDB = require('./init/init');
 connectDB();
-const rateLimit = require('./middleware/ratelimit');
+
 
 //require Routes
 const userRoutes = require('./routes/user');
@@ -23,7 +23,7 @@ const authMiddleware = require("./middleware/auth");
 
 
 // inbuilt middlewares
-app.use(rateLimit);
+
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
