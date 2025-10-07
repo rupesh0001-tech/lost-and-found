@@ -17,7 +17,8 @@ const rateLimit = require('./middleware/ratelimit');
 const userRoutes = require('./routes/user');
 const homeRoutes = require('./routes/home');
 const itemRoutes = require('./routes/listing');
-const adminRoutes = require('./routes/admin')
+const adminRoutes = require('./routes/admin');
+const otherRoutes = require('./routes/other')
 const authMiddleware = require("./middleware/auth");
 
 
@@ -39,6 +40,7 @@ app.use('/', homeRoutes);
 app.use('/', userRoutes);
 app.use('/', itemRoutes);
 app.use('/', adminRoutes);
+app.use('/', otherRoutes);
 
 //error handling middleware 
 app.use((req, res, next) => {
