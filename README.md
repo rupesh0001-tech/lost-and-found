@@ -27,7 +27,7 @@ A web application for managing lost and found items, allowing users to report lo
 ### Frontend
 - EJS templates
 - Bootstrap for responsive design
-- Custom CSS for styling
+- Modular CSS architecture with dedicated CSS files for each view
 
 ### Backend
 - Node.js and Express.js
@@ -41,6 +41,19 @@ A web application for managing lost and found items, allowing users to report lo
 1. Install dependencies: `npm install`
 2. Configure environment variables in `.env`
 3. Start the server: `node app.js`
+
+## Project Structure
+
+```
+├── middleware/       # Authentication middleware
+├── models/           # MongoDB models
+├── public/           # Static assets
+│   ├── assets/       # Images and other assets
+│   ├── *.css         # Dedicated CSS files for each view
+├── routes/           # Express routes
+├── views/            # EJS templates
+│   ├── partials/     # Reusable template parts
+```
 
 ## API Endpoints
 
