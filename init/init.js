@@ -1,5 +1,6 @@
 // init/init.js
 const mongoose = require("mongoose");
+require('dotenv').config(); // load .env locally
 
 let cached = global.mongoose;
 
@@ -9,8 +10,18 @@ async function connectDB() {
   if (cached.conn) return cached.conn;
 
   if (!cached.promise) {
+    // Ensure the env variable is defined
+    const mongoUri = process.env.MONGO_URL;
+    if (!mongoUri) {
+      throw new Error(
+        "MONGO_URI is not defined in environment variables. Check your .env file or Vercel environment variables."
+      );
+    }
+
     const opts = { useNewUrlParser: true, useUnifiedTopology: true };
-    cached.promise = mongoose.connect(process.env.MONGO_URI, opts).then((mongoose) => mongoose);
+
+    // Connect to MongoDB
+    cached.promise = mongoose.connect(mongoUri, opts).then((mongoose) => mongoose);
   }
 
   cached.conn = await cached.promise;
